@@ -1,1 +1,1984 @@
 # test2
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="call_detail" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" resourceBundle="com.brightpattern.reports.oob_reports" uuid="30da7ccd-cf32-4cbf-bfe7-ae9d350b4305">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="514"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial or IPA Mincho(Japan)" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#000000" vTextAlign="Middle" fontName="Arial or IPA Mincho(Japan)" fontSize="10" isBold="false"/>
+	<style name="Column header" mode="Opaque" forecolor="#000000" backcolor="#B6D9F2" hTextAlign="Center" hImageAlign="Center" vTextAlign="Top" vImageAlign="Top" fontName="Arial or IPA Mincho(Japan)" fontSize="10" isBold="true">
+		<box topPadding="3" leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.0" lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#B6D9F2"/>
+			<leftPen lineWidth="0.25" lineColor="#B6D9F2"/>
+			<bottomPen lineWidth="0.25" lineColor="#B6D9F2"/>
+			<rightPen lineWidth="0.25" lineColor="#B6D9F2"/>
+		</box>
+	</style>
+	<style name="Total" mode="Transparent" hTextAlign="Right" hImageAlign="Right" vTextAlign="Middle" vImageAlign="Middle" fontName="Arial or IPA Mincho(Japan)" fontSize="10" isBold="false">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0" lineColor="#B6D9F2"/>
+			<leftPen lineWidth="0.0" lineColor="#B6D9F2"/>
+			<bottomPen lineWidth="0.0" lineColor="#B6D9F2"/>
+			<rightPen lineWidth="0.0" lineColor="#B6D9F2"/>
+		</box>
+	</style>
+	<style name="Detail" mode="Transparent" fontName="Arial or IPA Mincho(Japan)">
+		<box>
+			<topPen lineWidth="0.0" lineColor="#7CA6C3"/>
+			<leftPen lineWidth="0.0" lineColor="#7CA6C3"/>
+			<bottomPen lineWidth="0.0" lineColor="#7CA6C3"/>
+			<rightPen lineWidth="0.0" lineColor="#7CA6C3"/>
+		</box>
+	</style>
+	<style name="Row" mode="Transparent" hTextAlign="Right" hImageAlign="Right" vTextAlign="Middle" vImageAlign="Middle" fontName="Arial or IPA Mincho(Japan)" fontSize="10">
+		<box topPadding="0" leftPadding="5" rightPadding="5">
+			<topPen lineWidth="0.25" lineColor="#B6D9F2"/>
+			<leftPen lineWidth="0.25" lineColor="#B6D9F2"/>
+			<bottomPen lineWidth="0.25" lineColor="#B6D9F2"/>
+			<rightPen lineWidth="0.25" lineColor="#B6D9F2"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{ROW_COUNTER}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#D8EDFC"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="9654505f-7082-482c-bf5b-86caeeb690b3"/>
+	<subDataset name="tableDataSet" uuid="d209cedc-88aa-42e3-8b7c-dedf99033a66">
+		<scriptlet name="FORMATTER" class="com.brightpattern.reports.scriptlets.FormatterScriptlet"/>
+		<parameter name="start_time" class="java.sql.Timestamp">
+			<property name="parameter.type" value="timeframe"/>
+			<property name="parameter.subtype" value="start"/>
+			<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2011-05-01 00:00:00")]]></defaultValueExpression>
+		</parameter>
+		<parameter name="end_time" class="java.sql.Timestamp">
+			<property name="parameter.type" value="timeframe"/>
+			<property name="parameter.subtype" value="end"/>
+			<property name="parameter.parent" value="start_time"/>
+			<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2011-08-15 18:00:00")]]></defaultValueExpression>
+		</parameter>
+		<parameter name="timeframe" class="java.lang.String">
+			<property name="parameter.type" value="timeframe"/>
+			<property name="parameter.subtype" value="name"/>
+			<property name="parameter.parent" value="start_time"/>
+		</parameter>
+		<parameter name="from_phone" class="java.lang.String">
+			<property name="parameter.displayname" value="From phone"/>
+			<property name="parameter.resourcedisplayname" value="input_from_phone"/>
+		</parameter>
+		<parameter name="from_phone_empty" class="java.lang.Integer" isForPrompting="false">
+			<defaultValueExpression><![CDATA[$P{from_phone} ? 0 : 1]]></defaultValueExpression>
+		</parameter>
+		<parameter name="original_destination_phone" class="java.lang.String">
+			<property name="parameter.displayname" value="Original destination phone"/>
+			<property name="parameter.resourcedisplayname" value="input_original_destination_phone"/>
+		</parameter>
+		<parameter name="original_destination_phone_empty" class="java.lang.Integer" isForPrompting="false">
+			<defaultValueExpression><![CDATA[$P{original_destination_phone} ? 0 : 1]]></defaultValueExpression>
+		</parameter>
+		<parameter name="connected_to_phone" class="java.lang.String">
+			<property name="parameter.displayname" value="Connected to phone"/>
+			<property name="parameter.resourcedisplayname" value="input_connected_to_phone"/>
+		</parameter>
+		<parameter name="connected_to_phone_empty" class="java.lang.Integer" isForPrompting="false">
+			<defaultValueExpression><![CDATA[$P{connected_to_phone} ? 0 : 1]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+    id,
+	start_time,
+	media_type,
+	caller_phone_type,
+	callee_phone_type,
+	ivr_time,
+	queue_time,
+	pending_time,
+	talk_time,
+	hold_time,
+	acw_time,
+	duration,
+	from_phone,
+	original_destination_phone,
+	connected_to_phone,
+	callee_login_id,
+	service_name,
+	scenario_name,
+	transferred_from_phone,
+	disposition,
+	agent_disposition_name,
+	agent_disposition_notes,
+	case_number,
+	email_subject,
+	thread_id,
+	in_service_level,
+	short_abandoned,
+	hex(global_interaction_id) callId,
+	voice_recording_banned,
+	monitoring_banned,
+	custom1,
+	custom2,
+	custom3,
+	custom4,
+	custom5,
+	custom6,
+	custom7,
+	custom8,
+	custom9,
+	custom10,
+	custom11,
+	custom12,
+	custom13,
+	custom14,
+	custom15,
+	custom16,
+	custom17,
+	custom18,
+	custom19,
+	custom20,
+	custom21,
+	custom22,
+	custom23,
+	custom24,
+	custom25,	
+	held,
+	max_hold,
+	cobrowsing,
+	call_pickup_group_name,
+	hunt_group_name,
+	callee_sip_response_code
+FROM call_detail
+WHERE (from_phone = $P{from_phone} OR $P{from_phone_empty} = 1)
+AND (original_destination_phone = $P{original_destination_phone} OR $P{original_destination_phone_empty} = 1)
+AND (connected_to_phone = $P{connected_to_phone} OR $P{connected_to_phone_empty} = 1)
+AND start_time >= $P{start_time} AND start_time < $P{end_time}
+AND media_type <> 'EMAIL'
+ORDER BY initial_start_time, initial_call_id, start_time]]>
+		</queryString>
+		<field name="id" class="java.lang.String"/>
+		<field name="start_time" class="java.sql.Timestamp"/>
+		<field name="media_type" class="java.lang.String"/>
+		<field name="pending_time" class="java.lang.Long"/>
+		<field name="duration" class="java.lang.Long"/>
+		<field name="from_phone" class="java.lang.String"/>
+		<field name="original_destination_phone" class="java.lang.String"/>
+		<field name="connected_to_phone" class="java.lang.String"/>
+		<field name="transferred_from_phone" class="java.lang.String"/>
+		<field name="caller_phone_type" class="java.lang.String"/>
+		<field name="callee_phone_type" class="java.lang.String"/>
+		<field name="callee_login_id" class="java.lang.String"/>
+		<field name="disposition" class="java.lang.String"/>
+		<field name="service_name" class="java.lang.String"/>
+		<field name="scenario_name" class="java.lang.String"/>
+		<field name="agent_disposition_name" class="java.lang.String"/>
+		<field name="agent_disposition_notes" class="java.lang.String"/>
+		<field name="ivr_time" class="java.lang.Long"/>
+		<field name="queue_time" class="java.lang.Long"/>
+		<field name="talk_time" class="java.lang.Long"/>
+		<field name="hold_time" class="java.lang.Long"/>
+		<field name="acw_time" class="java.lang.Long"/>
+		<field name="email_subject" class="java.lang.String"/>
+		<field name="case_number" class="java.lang.String"/>
+		<field name="thread_id" class="java.lang.String"/>
+		<field name="in_service_level" class="java.lang.String"/>
+		<field name="short_abandoned" class="java.lang.String"/>
+		<field name="callId" class="java.lang.String"/>
+		<field name="voice_recording_banned" class="java.lang.Boolean"/>
+		<field name="monitoring_banned" class="java.lang.Boolean"/>
+		<field name="custom1" class="java.lang.String"/>
+		<field name="custom2" class="java.lang.String"/>
+		<field name="custom3" class="java.lang.String"/>
+		<field name="custom4" class="java.lang.String"/>
+		<field name="custom5" class="java.lang.String"/>
+		<field name="custom6" class="java.lang.String"/>
+		<field name="custom7" class="java.lang.String"/>
+		<field name="custom8" class="java.lang.String"/>
+		<field name="custom9" class="java.lang.String"/>
+		<field name="custom10" class="java.lang.String"/>
+		<field name="custom11" class="java.lang.String"/>
+		<field name="custom12" class="java.lang.String"/>
+		<field name="custom13" class="java.lang.String"/>
+		<field name="custom14" class="java.lang.String"/>
+		<field name="custom15" class="java.lang.String"/>
+		<field name="custom16" class="java.lang.String"/>
+		<field name="custom17" class="java.lang.String"/>
+		<field name="custom18" class="java.lang.String"/>
+		<field name="custom19" class="java.lang.String"/>
+		<field name="custom20" class="java.lang.String"/>
+		<field name="custom21" class="java.lang.String"/>
+		<field name="custom22" class="java.lang.String"/>
+		<field name="custom23" class="java.lang.String"/>
+		<field name="custom24" class="java.lang.String"/>
+		<field name="custom25" class="java.lang.String"/>
+		<field name="held" class="java.lang.Long"/>
+		<field name="max_hold" class="java.lang.Long"/>
+		<field name="cobrowsing" class="java.lang.Boolean"/>
+		<field name="call_pickup_group_name" class="java.lang.String"/>
+		<field name="hunt_group_name" class="java.lang.String"/>
+		<field name="callee_sip_response_code" class="java.lang.String"/>
+		<variable name="ROW_COUNTER" class="java.lang.Long" incrementType="Group" incrementGroup="id" calculation="Count">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<group name="id">
+			<groupExpression><![CDATA[$F{id}]]></groupExpression>
+		</group>
+	</subDataset>
+	<scriptlet name="FORMATTER" class="com.brightpattern.reports.scriptlets.FormatterScriptlet"/>
+	<parameter name="start_time" class="java.sql.Timestamp">
+		<property name="parameter.type" value="timeframe"/>
+		<property name="parameter.subtype" value="start"/>
+		<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2011-05-01 00:00:00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="end_time" class="java.sql.Timestamp">
+		<property name="parameter.type" value="timeframe"/>
+		<property name="parameter.subtype" value="end"/>
+		<property name="parameter.parent" value="start_time"/>
+		<defaultValueExpression><![CDATA[java.sql.Timestamp.valueOf("2011-08-15 18:00:00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="timeframe" class="java.lang.String">
+		<property name="parameter.type" value="timeframe"/>
+		<property name="parameter.subtype" value="name"/>
+		<property name="parameter.parent" value="start_time"/>
+	</parameter>
+	<parameter name="from_phone" class="java.lang.String">
+		<property name="parameter.displayname" value="From phone"/>
+		<property name="parameter.resourcedisplayname" value="input_from_phone"/>
+	</parameter>
+	<parameter name="from_phone_empty" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{from_phone} ? 0 : 1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="original_destination_phone" class="java.lang.String">
+		<property name="parameter.displayname" value="Original destination phone"/>
+		<property name="parameter.resourcedisplayname" value="input_original_destination_phone"/>
+	</parameter>
+	<parameter name="original_destination_phone_empty" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{original_destination_phone} ? 0 : 1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="connected_to_phone" class="java.lang.String">
+		<property name="parameter.displayname" value="Connected to phone"/>
+		<property name="parameter.resourcedisplayname" value="input_connected_to_phone"/>
+	</parameter>
+	<parameter name="connected_to_phone_empty" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{connected_to_phone} ? 0 : 1]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+   id,
+	start_time,
+	media_type,
+	caller_phone_type,
+	callee_phone_type,
+	ivr_time,
+	queue_time,
+	pending_time,
+	talk_time,
+	hold_time,
+	acw_time,
+	duration,
+	from_phone,
+	original_destination_phone,
+	connected_to_phone,
+	callee_login_id,
+	service_name,
+	scenario_name,
+	transferred_from_phone,
+	disposition,
+	agent_disposition_name,
+	agent_disposition_notes,
+	case_number,
+	email_subject,
+	thread_id,
+	in_service_level,
+	short_abandoned
+FROM call_detail
+WHERE (from_phone = $P{from_phone} OR $P{from_phone_empty} = 1)
+AND (original_destination_phone = $P{original_destination_phone} OR $P{original_destination_phone_empty} = 1)
+AND (connected_to_phone = $P{connected_to_phone} OR $P{connected_to_phone_empty} = 1)
+AND start_time >= $P{start_time} AND start_time < $P{end_time}
+AND media_type <> 'EMAIL'
+ORDER BY initial_start_time, initial_call_id, start_time]]>
+	</queryString>
+	<field name="start_time" class="java.sql.Timestamp"/>
+	<field name="media_type" class="java.lang.String"/>
+	<field name="id" class="java.lang.String"/>
+	<field name="pending_time" class="java.lang.Long"/>
+	<field name="duration" class="java.lang.Long"/>
+	<field name="from_phone" class="java.lang.String"/>
+	<field name="original_destination_phone" class="java.lang.String"/>
+	<field name="connected_to_phone" class="java.lang.String"/>
+	<field name="transferred_from_phone" class="java.lang.String"/>
+	<field name="caller_phone_type" class="java.lang.String"/>
+	<field name="callee_phone_type" class="java.lang.String"/>
+	<field name="callee_login_id" class="java.lang.String"/>
+	<field name="disposition" class="java.lang.String"/>
+	<field name="service_name" class="java.lang.String"/>
+	<field name="scenario_name" class="java.lang.String"/>
+	<field name="agent_disposition_name" class="java.lang.String"/>
+	<field name="agent_disposition_notes" class="java.lang.String"/>
+	<field name="ivr_time" class="java.lang.Long"/>
+	<field name="queue_time" class="java.lang.Long"/>
+	<field name="talk_time" class="java.lang.Long"/>
+	<field name="hold_time" class="java.lang.Long"/>
+	<field name="acw_time" class="java.lang.Long"/>
+	<field name="email_subject" class="java.lang.String"/>
+	<field name="case_number" class="java.lang.String"/>
+	<field name="thread_id" class="java.lang.String"/>
+	<field name="in_service_level" class="java.lang.String"/>
+	<field name="short_abandoned" class="java.lang.String"/>
+	<variable name="ROW_COUNTER" class="java.lang.Long" calculation="Count">
+		<variableExpression><![CDATA[1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="CURRENT_PAGE_NUMBER" class="java.lang.Long" resetType="None">
+		<variableExpression><![CDATA[$V{CURRENT_PAGE_NUMBER}==null ? $V{PAGE_NUMBER} : $V{PAGE_NUMBER}+1]]></variableExpression>
+	</variable>
+	<title>
+		<band height="50">
+			<textField>
+				<reportElement style="Title" x="0" y="0" width="700" height="35" forecolor="#000000" uuid="ef6cc7e8-981a-4973-8a2e-394871feddbf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="24" isBold="false"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="2.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{title_call_detail}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="700" y="0" width="50" height="50" uuid="46518e85-57f5-43e0-9530-a5a27833613f"/>
+				<imageExpression><![CDATA["./report_logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="54">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="SubTitle" positionType="Float" x="0" y="18" width="480" height="18" uuid="d80aec83-ba63-4a89-9519-6ff793e9341a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="none">
+					<font size="10" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{title_call_detail} + " - " + msg($R{title_report_for_period}, $P{timeframe}) + " (" + $P{FORMATTER_SCRIPTLET}.getTimeZoneName($P{REPORT_TIME_ZONE}) + ")"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Auto">
+				<reportElement style="SubTitle" positionType="Float" x="480" y="18" width="270" height="18" forecolor="#000000" uuid="f2cf8b8e-4be1-4512-a15d-30c1f34568db">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[msg($R{report_generation_time},$P{FORMATTER_SCRIPTLET}.getReportDate(), $P{FORMATTER_SCRIPTLET}.getReportTime() )+" - "+msg($R{footer_page_number_all}, $V{CURRENT_PAGE_NUMBER}, $V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="SubTitle" positionType="Float" x="0" y="0" width="750" height="18" uuid="df4d39db-d338-45b1-95b4-d9a200f9dbfc">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="none">
+					<font size="10" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[msg($R{title_from_phone}, $P{from_phone} == null? "": $P{from_phone}) + ", " + msg($R{title_original_destination_phone}, $P{original_destination_phone} == null? "" : $P{original_destination_phone}) + ", " + msg($R{title_connected_to_phone}, $P{connected_to_phone} == null ? "" : $P{connected_to_phone})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField evaluationTime="Auto" hyperlinkTarget="Blank">
+				<reportElement style="SubTitle" positionType="Float" x="480" y="2" width="200" height="18" forecolor="#808080" uuid="fbc169cf-1f0f-489e-aa58-fc0129570673">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="10" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{footer_powered_by}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto" hyperlinkType="Reference" hyperlinkTarget="Blank">
+				<reportElement style="SubTitle" positionType="Float" x="680" y="2" width="72" height="18" forecolor="#0645AD" uuid="823aad9d-fc42-49d3-a7c3-5fc05b957346">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="10" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" Bright Pattern"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA["https://www.brightpattern.com"]]></hyperlinkReferenceExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="56" splitType="Immediate">
+			<componentElement>
+				<reportElement positionType="Float" mode="Transparent" x="0" y="0" width="752" height="56" uuid="5167a0d5-1412-4821-8f64-ab382aa518ee">
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="tableDataSet" uuid="170db0a9-1cc1-4b42-96d9-90e4c45198a3">
+						<datasetParameter name="connected_to_phone">
+							<datasetParameterExpression><![CDATA[$P{connected_to_phone}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="connected_to_phone_empty">
+							<datasetParameterExpression><![CDATA[$P{connected_to_phone_empty}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="end_time">
+							<datasetParameterExpression><![CDATA[$P{end_time}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="from_phone">
+							<datasetParameterExpression><![CDATA[$P{from_phone}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="from_phone_empty">
+							<datasetParameterExpression><![CDATA[$P{from_phone_empty}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="original_destination_phone">
+							<datasetParameterExpression><![CDATA[$P{original_destination_phone}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="original_destination_phone_empty">
+							<datasetParameterExpression><![CDATA[$P{original_destination_phone_empty}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="start_time">
+							<datasetParameterExpression><![CDATA[$P{start_time}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="50" uuid="042834be-671e-4d03-8596-6c7022fd4730">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="bp.oob.category" value="$R{category_date_time}"/>
+						<property name="bp.oob.description" value="$R{col_cdr_date_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField isStretchWithOverflow="true" pattern="">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="99bb68a4-edd6-4959-9397-fc1778885f03">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textElement textAlignment="Left">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$P{FORMATTER_SCRIPTLET}.formatShortDate($F{start_time})]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true" pattern="">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="23dbd6db-cb00-4f8f-9529-ef0b4f1ddc38"/>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_date}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="56" uuid="15424ae9-e215-41f8-bc25-38217d196d62">
+						<property name="bp.oob.category" value="$R{category_date_time}"/>
+						<property name="bp.oob.description" value="$R{col_cdr_time_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" pattern="">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="56" height="14" uuid="42a4d056-ca5e-4991-a316-3f6bbcbeaa44">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textElement textAlignment="Left">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$P{FORMATTER_SCRIPTLET}.formatShortTime($F{start_time})]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" pattern="">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="56" height="42" forecolor="#000000" uuid="eb400df1-db55-42a4-83d5-4ad3c09c4f9e"/>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_time}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="58" uuid="19960075-28b1-4cb0-9125-38d83aa27894">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="bp.oob.category" value="$R{category_classifier}"/>
+						<property name="bp.oob.description" value="$R{col_cdr_type_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="58" height="14" uuid="32eea42f-0f23-417f-ac45-e75ff37b346c">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textElement>
+										<font size="10" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{media_type} == "CHAT" ? ($F{caller_phone_type} == "INTERNAL" && $F{callee_phone_type} == "EXTERNAL" ? $R{data_outbound_chat} : $R{data_inbound_chat}) :
+$F{caller_phone_type} == "EXTERNAL" && $F{callee_phone_type} == "INTERNAL" ? $R{data_inbound_call} :
+$F{caller_phone_type} == "INTERNAL" && $F{callee_phone_type} == "EXTERNAL" ? $R{data_outbound_call} :
+$F{caller_phone_type} == "INTERNAL" && $F{callee_phone_type} == "INTERNAL" ? $R{data_internal_call} :
+$F{caller_phone_type} == "EXTERNAL" && $F{callee_phone_type} == "EXTERNAL" ? $R{data_external_call} :
+$F{caller_phone_type} == null && $F{callee_phone_type} == "INTERNAL" ? $R{data_internal_call} :
+$F{caller_phone_type} == null && $F{callee_phone_type} == "EXTERNAL" ? $R{data_outbound_call} :
+$F{caller_phone_type} == "INTERNAL" && $F{callee_phone_type} == null ? $R{data_internal_call} :
+$F{caller_phone_type} == "EXTERNAL" && $F{callee_phone_type} == null ? $R{data_inbound_call} :
+null]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="58" height="42" forecolor="#000000" uuid="9cb37662-cf2b-4129-85f9-8d8b8ed4f906"/>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_type}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="c3a17b28-846a-45ff-9567-285ca890397b">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="bp.oob.category" value="$R{category_time}"/>
+						<property name="bp.oob.description" value="$R{col_ivr_time_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="52" height="14" uuid="75eb8e2f-5212-4683-8064-4e2278fefc9e">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{ivr_time} > 0 ? $P{FORMATTER_SCRIPTLET}.formatDuration($F{ivr_time}) : ""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="52" height="42" forecolor="#000000" uuid="f89fe864-f353-47ed-8fbd-27b7395c1ba6"/>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_ivr_time}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="0f5215c3-5790-401d-b5ce-d6ff4ac9816b">
+						<property name="bp.oob.category" value="$R{category_time}"/>
+						<property name="bp.oob.description" value="$R{col_queue_time_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="52" height="14" uuid="3b067ad3-c2fa-43cd-9393-a543617d731d">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{service_name} ? $P{FORMATTER_SCRIPTLET}.formatDuration($F{queue_time}) : ""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="52" height="42" forecolor="#000000" uuid="512f20b0-ea24-48e5-8694-32ba4dc29368"/>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_queue_time}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="1e444ffd-d2ce-46d3-af96-2732a9b9cecf">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="bp.oob.category" value="$R{category_time}"/>
+						<property name="bp.oob.description" value="$R{col_dialing_time_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="52" height="14" uuid="8c8cf7ee-3866-43d7-9058-144254d21ae5"/>
+									<textElement>
+										<font size="10" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{pending_time} > 0? $P{FORMATTER_SCRIPTLET}.formatDuration($F{pending_time}) : ""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="52" height="42" forecolor="#000000" uuid="171e270f-de34-435e-bdff-eb03423f65fd"/>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_dialing_ringing_time}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="40a78be4-6052-4d72-8dc2-3e0b287d5197">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="bp.oob.category" value="$R{category_time}"/>
+						<property name="bp.oob.description" value="$R{col_talk_time_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="52" height="14" uuid="ec8dfd0b-df3e-40a3-a461-f24b568cc1d7"/>
+									<textFieldExpression><![CDATA[$F{talk_time} > 0 ? $P{FORMATTER_SCRIPTLET}.formatDuration($F{talk_time}) : ""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="52" height="42" forecolor="#000000" uuid="8566bdee-2f65-4acc-8d87-bff25b624746"/>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_cd_talk_time}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="79088860-1cf2-4c5e-b8ec-662bdbdcfb4c">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="bp.oob.category" value="$R{category_time}"/>
+						<property name="bp.oob.description" value="$R{col_cdr_hold_time_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="52" height="14" uuid="91b5757c-fe5b-4dbf-8a6b-d79efb35d400">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{hold_time} > 0 ? $P{FORMATTER_SCRIPTLET}.formatDuration($F{hold_time}) : ""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Column header" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="52" height="42" forecolor="#000000" uuid="03a6bac6-7aa1-43a5-8f75-40396e1641e2">
+									<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+								</reportElement>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_cd_hold_time}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="662d39b5-a503-4522-8920-a2b4a71001b1">
+						<property name="bp.oob.category" value="$R{category_time}"/>
+						<property name="bp.oob.description" value="$R{col_cdr_acw_time_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="54959080-fabe-4c8c-b918-6afe943e7c9d"/>
+									<textFieldExpression><![CDATA[$F{service_name} && $F{acw_time} > 0 ? $P{FORMATTER_SCRIPTLET}.formatDuration($F{acw_time}) : ""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="fdf2180e-af24-48fb-bac7-ddb02f18f98e"/>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_wrap_up_time}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="5eb753e8-68ae-477f-ac34-cd39e3d70529">
+						<property name="bp.oob.category" value="$R{category_time}"/>
+						<property name="bp.oob.description" value="$R{col_cdr_duration_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="c630f46d-cbd2-49d2-869f-eab9e9f015f2"/>
+									<textElement>
+										<font size="10" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$P{FORMATTER_SCRIPTLET}.formatDuration($F{duration})]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Column header" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="46432c2c-f560-4138-b8ce-b1aaa71ad916"/>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_duration}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="62" uuid="ff81028a-810e-42ec-a123-d07a9b7100ce">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_from_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="62" height="14" uuid="11f31955-5994-4d31-a679-872ce6b9907f">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textElement>
+										<font size="10" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{from_phone}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="62" height="42" forecolor="#000000" uuid="743406bc-f1bb-430d-b0fa-12a1afd17b84">
+									<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+								</reportElement>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_from}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="b017207a-9a09-4964-86e7-08893287012f">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_dest_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column12"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="70" height="14" uuid="650447dd-7b86-4280-914e-29e1e6cabd61">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textElement>
+										<font size="10" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{original_destination_phone}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="70" height="42" forecolor="#000000" uuid="889c1180-208c-442a-9194-8ff175d3ff2e"/>
+								<textElement rotation="None"/>
+								<textFieldExpression><![CDATA[$R{col_original_destination}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="bb672e00-8454-4f36-9daa-501d66807d23">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_connected_to_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column13"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="70" height="14" uuid="53a08aec-1e09-4dc6-861c-37cc11944431">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textElement>
+										<font size="10" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{callee_login_id}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="70" height="42" forecolor="#000000" uuid="67404692-5ffc-435d-ac4c-898b249f2135">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$R{col_connected_to}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="0af4b8dc-2877-46fc-9f19-500ab50ac172">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_connected_to_number_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column14"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="70" height="14" uuid="d16a4145-0fcb-4937-9c9c-5f999c92f681">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{media_type} == 'CHAT' ? ($F{caller_phone_type} == "INTERNAL" && $F{callee_phone_type} == "EXTERNAL" ? $F{connected_to_phone} : "") : $F{connected_to_phone}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="70" height="42" forecolor="#000000" uuid="b74e6911-3a39-4855-86aa-6d9f57f9d716"/>
+								<textFieldExpression><![CDATA[$R{col_connected_to_number}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="2eef5a97-c4da-40b7-99b0-7fc4df1b2a4e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column15"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="72" height="14" uuid="930be7e2-257a-49bc-87db-a2b017752e4f">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{call_pickup_group_name}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="72" height="42" forecolor="#000000" uuid="3ea46b3b-152c-4365-8e98-e101eaa6e730"/>
+								<textFieldExpression><![CDATA[$R{col_call_pickup_group}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="72" uuid="24d02b87-ff4e-452a-b477-aeb166fdaad6">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column16"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="72" height="14" uuid="5bd6dd5b-db0c-465b-8f93-8a9716897703">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{hunt_group_name}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="72" height="42" forecolor="#000000" uuid="cc2fd221-0b7c-4ba2-a5b6-b375e085df5d"/>
+								<textFieldExpression><![CDATA[$R{col_hunt_group}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="72" uuid="99e6c331-ff94-4500-ab40-faeaecb84870">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column17"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="72" height="14" uuid="5bd6dd5b-db0c-465b-8f93-8a9716897703">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{callee_sip_response_code}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="72" height="42" forecolor="#000000" uuid="cc2fd221-0b7c-4ba2-a5b6-b375e085df5d"/>
+								<textFieldExpression><![CDATA[$R{col_callee_sip_response_code}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="62" uuid="5e427b3a-e381-404c-938b-bb2db8286294">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_scenario_name_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column18"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="62" height="14" uuid="ab3ba692-bfbf-4401-b29a-5475dbfc1c4d"/>
+									<textFieldExpression><![CDATA[$F{scenario_name}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="62" height="42" forecolor="#000000" uuid="f98d9b9b-1f5b-4c51-9fe5-c6e4bf01da15"/>
+								<textFieldExpression><![CDATA[$R{col_scenario_name}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="f662e547-8106-47bf-be10-7ddb4c40b5ba">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_service_name_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column19"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="72" height="14" uuid="a00356ec-4b2d-4a80-83ad-aa799016d062">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{service_name}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="72" height="42" forecolor="#000000" uuid="7283455c-ef29-46b6-ae52-812700174a40">
+									<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$R{col_service_campaign}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="dbc8d464-87f2-489d-a71d-809d83312d65">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_transferred_from_desc}"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column20"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="72" height="14" uuid="6b5ed8f9-55cc-4621-a882-5673abbd4384">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textElement>
+										<font size="10" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{transferred_from_phone}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="72" height="42" forecolor="#000000" uuid="7fc4c0c5-16cb-4f5a-97d9-2799108435c7"/>
+								<textFieldExpression><![CDATA[$R{col_transferred_from}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="ddb84ef9-5eee-4d25-8ad3-2237b6cb5eef">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_disposition_name_desc}"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column21"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="72" height="14" uuid="d4768478-ff79-445b-9027-9fdbb43bd8b9">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{agent_disposition_name}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="72" height="42" forecolor="#000000" uuid="9f29e16c-416c-4bc7-91ce-9cc785929c77"/>
+								<textFieldExpression><![CDATA[$R{col_agent_disposition_name}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="c1bef955-219a-43d9-9305-f6e8769a1381">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_disposition_notes_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column22"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="65" height="14" uuid="e81f1428-1f1a-4bf6-9155-baca01a86486">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{agent_disposition_notes}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="65" height="42" forecolor="#000000" uuid="66656d0d-f991-4658-aa4d-50c254ec656e">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$R{col_agent_disposition_notes}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="55" uuid="87b4ed05-b7fa-4e74-9486-d574b57a65fa">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_disposition_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column23"/>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="55" height="14" uuid="bde904c0-deec-4154-95e0-c229428cf5a4">
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textElement>
+										<font size="10" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{disposition}=="CALLER_TERMINATED" ? $R{data_caller_terminated} :
+$F{disposition}=="CALLEE_TERMINATED" ? $R{data_callee_terminated} :
+$F{disposition}=="TRANSFERRED" ? $R{data_transferred_by} + " " + $F{connected_to_phone} :
+$F{disposition}=="CONFERENCED" ? $R{data_continued} :
+$F{disposition}=="SYSTEM_DISCONNECTED" ? $R{data_system_disconnected} :
+$F{disposition}=="SELF_SERVICE" ? $R{data_self_service} :
+$F{disposition}=="ABANDONED" ? $R{data_abandoned_ivr} :
+$F{disposition}=="ABANDONED_QUEUE" ? $R{data_abandoned_queue} :
+$F{disposition}=="ABANDONED_RINGING" ? $R{data_abandoned_ringing} :
+$F{disposition}=="NO_ANSWER" ? $R{data_no_answer} :
+$F{disposition}=="CALLED_PARTY_BUSY" ? $R{data_called_party_busy} :
+$F{disposition}=="NETWORK_BUSY" ? $R{data_network_busy} :
+$F{disposition}=="CALLER_TRANSFERRED" ? $R{data_transferred_by} + " " + $F{from_phone} :
+$F{disposition}=="MANDATORY_RECORDING_FAILURE" ? $R{data_mandatory_recording_failure} :
+$F{disposition}=="DEST_FORBIDDEN" ? $R{data_dest_forbidden} :
+$F{disposition}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="55" height="42" forecolor="#000000" uuid="c263bab9-d52f-4cf0-aba5-ad9c495b3d5c">
+									<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$R{col_disposition}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="55" uuid="82fe538a-c98f-4ecb-b34c-0e4811f8589a">
+						<property name="bp.oob.category" value="$R{category_classifier}"/>
+						<property name="bp.oob.description" value="$R{col_media_type_desc}"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column24"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="55" height="14" uuid="9af1b064-5f77-4fe4-a08b-7b4069b9e3cb">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{media_type}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="55" height="42" forecolor="#000000" uuid="3cf3fb43-e83d-47f9-8323-b0581d7d08c5"/>
+								<textFieldExpression><![CDATA[$R{col_media_type}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="987460b4-d581-4b36-a1d8-bdad70324d9a">
+						<property name="bp.oob.category" value="$R{category_classifier}"/>
+						<property name="bp.oob.description" value="$R{col_in_sl_desc}"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column25"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="52" height="14" uuid="1f1614c9-eb61-48f3-8fe5-890a9e06732b">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{in_service_level} == "N" ?
+$R{data_in_sl_no} :
+$F{in_service_level} == "Y" ?
+$R{data_in_sl_yes} :
+""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="52" height="42" forecolor="#000000" uuid="bb1c4d00-1f34-4340-b925-76e284498bdf"/>
+								<textFieldExpression><![CDATA[$R{col_in_sl}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="465f6727-99de-495b-bf05-d31f42aed4a0">
+						<property name="bp.oob.category" value="$R{category_classifier}"/>
+						<property name="bp.oob.description" value="$R{col_short_abandoned_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column26"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="52" height="14" uuid="241cf997-574c-498f-b6fc-d817ecf393ab">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{short_abandoned} == "N" ?
+$R{data_short_abandoned_no} :
+$F{short_abandoned} == "Y" ?
+$R{data_short_abandoned_yes} :
+""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="52" height="42" forecolor="#000000" uuid="d9c03846-1854-4f8a-9492-2345c554bc6c"/>
+								<textFieldExpression><![CDATA[$R{col_short_abandoned}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="57" uuid="49d1d70c-306a-45ea-a020-094b67732712">
+						<property name="bp.oob.category" value="$R{category_classifier}"/>
+						<property name="bp.oob.description" value="$R{col_voice_recording_banned_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column27"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="57" height="14" uuid="edba4d37-dae0-43ab-85d8-487bfbc54e73">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[($F{voice_recording_banned}  != null && $F{voice_recording_banned}) ? "1" : "0"]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="57" height="42" forecolor="#000000" uuid="d013cf83-0e0e-4ee3-b2a2-1f6db2a0a3ce"/>
+								<textFieldExpression><![CDATA[$R{col_voice_recording_banned}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="58" uuid="8e747c24-34ba-43cb-8ca4-9bed7ba10773">
+						<property name="bp.oob.category" value="$R{category_classifier}"/>
+						<property name="bp.oob.description" value="$R{col_monitoring_banned_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column28"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="58" height="14" uuid="9e49d21a-ebd4-42ec-8286-e6c088f0c3a9">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[($F{monitoring_banned} != null && $F{monitoring_banned}) ? "1" : "0"]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="58" height="42" forecolor="#000000" uuid="1d7ed93c-479f-48c2-8402-5d0a2355a2b2"/>
+								<textFieldExpression><![CDATA[$R{col_monitoring_banned}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="140" uuid="956432ae-5271-4e58-a3cb-759f5a5a7af6">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_global_id_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column29"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="140" height="14" uuid="4d1cacb4-612c-411d-9aaf-569fa7030c71">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$P{FORMATTER_SCRIPTLET}.formatGUID($F{callId})]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="140" height="42" forecolor="#000000" uuid="79561f1b-ec0d-49bf-a5fb-a284dba62ee3"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$R{col_global_id}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="776c4e42-30e4-448d-8d49-44526536a45e">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom1_desc}"/>
+						<property name="bp.oob.custom_field_index" value="0"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column30"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="c8b6cae6-d56a-4d55-9f55-5f3cfb295f10">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom1}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="33eb02b8-006d-420e-9087-c932b23c8680"/>
+								<textFieldExpression><![CDATA[$R{col_custom1}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="91e0eab6-8aeb-41c9-991c-e08b08427fc9">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom2_desc}"/>
+						<property name="bp.oob.custom_field_index" value="1"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column31"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="67b5f08c-4f83-4eac-8b6f-f5447f7bca13">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom2}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="aa402e97-6ca3-43cc-9c7d-efce33457a5f"/>
+								<textFieldExpression><![CDATA[$R{col_custom2}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="adc1ecd5-01ee-4713-9a37-f87123176cc0">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom3_desc}"/>
+						<property name="bp.oob.custom_field_index" value="2"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column32"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="a76a62fe-9a52-43b1-bc5f-bbf9f7a41913">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom3}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="6ab1a5b8-a3ed-4622-b301-f6f1434ff1e8"/>
+								<textFieldExpression><![CDATA[$R{col_custom3}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="fdba7705-aafd-45ed-bcff-9d185795b688">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom4_desc}"/>
+						<property name="bp.oob.custom_field_index" value="3"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column33"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="cc90e8b0-1531-449e-af26-146fe981295d">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom4}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="c2fc3198-3289-40df-9528-707af5c5aa41"/>
+								<textFieldExpression><![CDATA[$R{col_custom4}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="a1e4551f-3bee-44c6-b2e2-da8a3a17b565">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom5_desc}"/>
+						<property name="bp.oob.custom_field_index" value="4"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column34"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="3fb8813d-3b01-4653-b9fa-659a5cb70e56">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom5}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="3b2dc2d3-c66f-4826-a0ad-ee3a8388995e"/>
+								<textFieldExpression><![CDATA[$R{col_custom5}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="8d46746b-ca6a-4037-9dbd-a17093b04c90">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom6_desc}"/>
+						<property name="bp.oob.custom_field_index" value="5"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column35"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="36831e22-26f1-4bcf-995b-abb6a4353f2a">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom6}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="9211928c-dc0d-446d-bd30-8c34c26a9314"/>
+								<textFieldExpression><![CDATA[$R{col_custom6}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="63aed6b6-824f-456c-b38e-b53ccaf98695">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom7_desc}"/>
+						<property name="bp.oob.custom_field_index" value="6"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column36"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="7bf6d363-f0f7-4fe5-8d39-71bb9c00362b">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom7}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="28ebb8db-394a-4004-ba1f-70acf172434f"/>
+								<textFieldExpression><![CDATA[$R{col_custom7}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="bf51d056-4dda-4921-a682-37a363a0b1e0">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom8_desc}"/>
+						<property name="bp.oob.custom_field_index" value="7"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column37"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="931b60ba-a91d-4812-afb0-a3c9d2c019a0">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom8}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="d0ddab68-46f8-4a0c-b3d9-c53316afd68f"/>
+								<textFieldExpression><![CDATA[$R{col_custom8}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="5f439fd8-7bc5-492c-8984-34596165ffb9">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom9_desc}"/>
+						<property name="bp.oob.custom_field_index" value="8"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column38"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="d3d5ac68-284e-4841-bc06-465655ac99b6">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom9}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="19fb92f6-79d6-4f85-9709-5513bd2a4e96"/>
+								<textFieldExpression><![CDATA[$R{col_custom9}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="4b1613e1-a78d-4535-b0bc-6b7dfe76c314">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom10_desc}"/>
+						<property name="bp.oob.custom_field_index" value="9"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column39"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="698a505b-bb62-4583-b465-951575e095c3">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom10}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="bcd25f9f-2a25-4cb9-be9e-e157c4c7041c"/>
+								<textFieldExpression><![CDATA[$R{col_custom10}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="cfe178ba-29aa-4d0d-8545-0874fb5d4708">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom11_desc}"/>
+						<property name="bp.oob.custom_field_index" value="10"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column40"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="30c85ccd-f1f6-4181-afc2-f4ab01ea2405">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom11}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="27fff61e-4c7f-4dd1-b645-5e3ffaa09c1a"/>
+								<textFieldExpression><![CDATA[$R{col_custom11}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="d62231c2-2184-4ebd-9f15-8b3be7800792">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom12_desc}"/>
+						<property name="bp.oob.custom_field_index" value="11"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column41"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="ce4dd919-77fc-47ec-84a7-d84b3d5f35b0">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom12}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="23e04510-41a5-4c2a-8386-f6aaed7572a8"/>
+								<textFieldExpression><![CDATA[$R{col_custom12}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="08eb4302-872f-4ee7-8c0f-f60fbb592289">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom13_desc}"/>
+						<property name="bp.oob.custom_field_index" value="12"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column42"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="dc0ee53e-b686-4d6c-bf67-8fff0e84c6a3">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom13}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="0edaa51e-d411-4e05-8d5f-309316b5250d"/>
+								<textFieldExpression><![CDATA[$R{col_custom13}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="812c7e09-1ed3-4650-b45d-720c1583a60b">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom14_desc}"/>
+						<property name="bp.oob.custom_field_index" value="13"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column43"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="a58860b8-6095-439d-8cad-9185846b6dfd">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom14}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="9f58ca16-d22b-4dfe-97de-f2dc589fbfba"/>
+								<textFieldExpression><![CDATA[$R{col_custom14}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="d5546765-bdb7-4074-adcd-31bb2a02b022">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom15_desc}"/>
+						<property name="bp.oob.custom_field_index" value="14"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column44"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="a8919a1a-e8f8-42e7-b3a6-2d65d1b5c70e">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom15}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="f65e7ff8-ef3a-449c-92c2-73402587e182"/>
+								<textFieldExpression><![CDATA[$R{col_custom15}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="c8bb87d2-2c2c-4726-9ba3-0aba5d074510">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom16_desc}"/>
+						<property name="bp.oob.custom_field_index" value="15"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column45"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="f65b4d64-2a10-4623-9a62-d557c870dc05">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom16}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="072c5469-c349-4f2a-a59d-b5cf6b57dc4a"/>
+								<textFieldExpression><![CDATA[$R{col_custom16}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="cb657623-78e8-44f4-8f82-1b4328bb6dce">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom17_desc}"/>
+						<property name="bp.oob.custom_field_index" value="16"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column46"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="a1172a55-7944-4eab-b5fc-ba261a33696e">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom17}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="ee511a49-6c54-4fd8-a72d-f2790fe47626"/>
+								<textFieldExpression><![CDATA[$R{col_custom17}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="1d7460e4-7568-4958-b69d-433f63da9e0d">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom18_desc}"/>
+						<property name="bp.oob.custom_field_index" value="17"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column47"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="85b1bffb-495c-4811-aca9-bd74acde7e74">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom18}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="6f8a2bb0-9eb3-44de-adb8-38e9e404783a"/>
+								<textFieldExpression><![CDATA[$R{col_custom18}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="18d5ff3e-4bfa-4ffd-92b3-2a80561eb4f8">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom19_desc}"/>
+						<property name="bp.oob.custom_field_index" value="18"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column48"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="7463cde5-dc90-4c39-96f6-ad0cb249a1ad">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom19}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="12e0eafe-ca67-49a4-9d37-22b809036b6f"/>
+								<textFieldExpression><![CDATA[$R{col_custom19}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="dcb6b05f-d1a1-4989-839b-3e2c4405c01a">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom20_desc}"/>
+						<property name="bp.oob.custom_field_index" value="19"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column49"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="80c3e397-9cc5-4963-9e86-a41e11c65e1e">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom20}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="64112340-04c0-48b0-9754-0067aea44a84"/>
+								<textFieldExpression><![CDATA[$R{col_custom20}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="250d89c0-6c9b-4f8f-8ded-f5cb05f9fe0f">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom21_desc}"/>
+						<property name="bp.oob.custom_field_index" value="20"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column50"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="11955475-81f7-46d9-979f-453c489771ef">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom21}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="aa466dee-1b21-4354-8d5b-b729017d24fa"/>
+								<textFieldExpression><![CDATA[$R{col_custom21}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="726dcb5c-71ef-4a33-9115-5a21776ba02f">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom22_desc}"/>
+						<property name="bp.oob.custom_field_index" value="21"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column51"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="a7944f22-9074-4b20-94ca-51821b13ca1b">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom22}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="4460636c-a3cb-4e88-b592-9d3d60e84b90"/>
+								<textFieldExpression><![CDATA[$R{col_custom22}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="30fd0722-a145-4da1-85b4-41aec6f8094a">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom23_desc}"/>
+						<property name="bp.oob.custom_field_index" value="22"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column52"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="0c66ad40-6020-480c-a536-e36ed88ba8a4">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom23}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="36205ce2-a034-47e2-93a6-e839eb567181"/>
+								<textFieldExpression><![CDATA[$R{col_custom23}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="ca54811a-994d-46eb-8cce-540a3664c351">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom24_desc}"/>
+						<property name="bp.oob.custom_field_index" value="23"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column53"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="c2834391-4f94-4d0d-aff6-fed5fac8c161">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom24}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="fbce36c2-72e7-4485-b165-58e4be49bb6c"/>
+								<textFieldExpression><![CDATA[$R{col_custom24}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="30fd0722-a145-4da1-8574-41a3c6f8094b">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_custom25_desc}"/>
+						<property name="bp.oob.custom_field_index" value="24"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column54"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="5c6101de-0577-464d-843d-78e299c76245">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+										<property name="net.sf.jasperreports.text.save.line.breaks" value="true"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{custom25}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="1689acd7-0dc1-4fe1-943b-1372d2a3d420"/>
+								<textFieldExpression><![CDATA[$R{col_custom25}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="6196ef3d-92b0-4184-9f14-1a5a63f28010">
+						<property name="bp.oob.category" value="$R{category_time}"/>
+						<property name="bp.oob.description" value="$R{col_held_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column55"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="75f390aa-b7c8-43a0-9676-0193978f81d6">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{held}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="d1393a32-b97d-413c-8a90-c4608365c2af"/>
+								<textFieldExpression><![CDATA[$R{col_held}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="afc55852-1c3e-469b-a9ad-fa64c0af3244">
+						<property name="bp.oob.category" value="$R{category_time}"/>
+						<property name="bp.oob.description" value="$R{col_max_hold_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column56"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="c484efbf-367f-4087-98a5-076e31dd5ee2">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{max_hold} > 0 ? $P{FORMATTER_SCRIPTLET}.formatDuration($F{max_hold}) : ""]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="90a0491a-5e26-4fa7-8b84-afcf0f128c44"/>
+								<textFieldExpression><![CDATA[$R{col_max_hold}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+					<jr:column width="50" uuid="415f7dc2-3ed1-4c69-9fdd-32c658ec7c73">
+						<property name="bp.oob.category" value="$R{category_data}"/>
+						<property name="bp.oob.description" value="$R{col_cd_cobrowse_desc}"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column57"/>
+						<printWhenExpression><![CDATA[java.lang.Boolean.FALSE]]></printWhenExpression>
+						<jr:groupFooter groupName="id">
+							<jr:cell height="14" rowSpan="1">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement style="Row" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="14" uuid="e9ce5790-ba0b-4e8a-8da0-fe295fcfef2a">
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[($F{cobrowsing}  != null && $F{cobrowsing}) ? "Y" : "N"]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="42" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Column header" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="50" height="42" forecolor="#000000" uuid="e40ae700-ed55-48de-b63b-6d30e9b77fc4"/>
+								<textFieldExpression><![CDATA[$R{col_cobrowse}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell height="0"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
